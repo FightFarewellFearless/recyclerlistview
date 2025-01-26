@@ -557,7 +557,7 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
     }
 
     private _queueStateRefresh(): void {
-        const refreshState = () => {
+        const refreshStates = () => {
             if (this._isMounted) {
                 this.setState((prevState) => {
                     return prevState;
