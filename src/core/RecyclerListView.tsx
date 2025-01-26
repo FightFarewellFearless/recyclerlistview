@@ -557,13 +557,18 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
     }
 
     private _queueStateRefresh(): void {
-        this.refreshRequestDebouncer(() => {
+        const refreshState = () => {
             if (this._isMounted) {
                 this.setState((prevState) => {
                     return prevState;
                 });
             }
-        });
+        };
+        if (typeof React?.startTransition !== "undefined") {
+            React.startTransition(refreshStates);
+        } else {
+            this.refreshRequestDebouncer(refreshStates);
+        }
     }
 
     private _onSizeChanged = (layout: Dimension): void => {
